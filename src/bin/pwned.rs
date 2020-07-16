@@ -1,3 +1,6 @@
+use pwned::read;
+
 fn main() {
-    println!("Hello world");
+    let password = read::read_password();
+    dbg!(password);
 }
