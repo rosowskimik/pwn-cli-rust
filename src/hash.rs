@@ -1,7 +1,7 @@
 use sha1::{Digest, Sha1};
 
-pub fn hash_string(password: String) -> String {
-    format!("{:02x}", Sha1::digest(password.as_bytes()))
+pub fn hash_string(input: String) -> String {
+    format!("{:02x}", Sha1::digest(input.as_bytes()))
 }
 
 #[cfg(test)]
