@@ -1,3 +1,3 @@
 pub mod hash;
-pub mod read;
+pub mod pass;
 pub mod request;
