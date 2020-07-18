@@ -1,7 +1,8 @@
 use sha1::{Digest, Sha1};
 
 pub fn hash_string(input: String) -> String {
-    format!("{:02x}", Sha1::digest(input.as_bytes()))
+    let hash = format!("{:02x}", Sha1::digest(input.as_bytes()));
+    hash.to_uppercase()
 }
 
 #[cfg(test)]
@@ -13,7 +14,7 @@ mod test {
         let hashed_password = hash_string(password);
         assert_eq!(
             hashed_password,
-            String::from("9bc34549d565d9505b287de0cd20ac77be1d3f2c")
+            String::from("9BC34549D565D9505B287DE0CD20AC77BE1D3F2C")
         );
     }
 }
