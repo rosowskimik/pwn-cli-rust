@@ -9,4 +9,5 @@ edition = "2018"
 [dependencies]
 rpassword = "4.0"
 sha-1 = "0.9"
-reqwest = { version = "0.10", features = ["blocking"] }
+surf = "2.0.0-alpha.4"
+async-std = "1.6.2"

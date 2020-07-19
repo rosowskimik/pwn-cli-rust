@@ -1,25 +1,16 @@
-use pwned::{hash, pass, request};
-use std::process;
+use async_std::task;
+use pwned::{hash, pass};
 
-fn main() {
+fn main() -> Result<(), surf::Error> {
     let password = pass::read_password();
     let hashed_password = hash::hash_string(password);
     let (head, tail) = hashed_password.split_at(5);
-
-    let response_list = match request::search_head(head) {
-        Ok(response) => response.text().unwrap(),
-        Err(_) => {
-            eprintln!("Check your internet connection");
-            process::exit(1);
-        }
-    };
-
-    match pass::search_pass(tail, &response_list) {
-        Some(count) => {
-            println!("Your password was found {} times.", count);
-        }
-        None => {
-            println!("Your password is safe.");
-        }
-    }
+    task::block_on(async {
+        let res = pass::fetch_password_list(head).await?;
+        match pass::search_list(tail, &res) {
+            Some(count) => println!("Your password was found {} times.", count),
+            None => println!("Your password is safe."),
+        };
+        Ok(())
+    })
 }
