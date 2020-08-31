@@ -1,13 +1,18 @@
 [package]
-name = "pwned"
-version = "0.1.0"
+name = "pwn"
+version = "1.0.0"
 authors = ["Mikołaj Rosowski <m.rosowski1@wp.pl>"]
 edition = "2018"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
+[profile.release]
+lto = true
+panic = 'abort'
+
 [dependencies]
-rpassword = "4.0"
-sha-1 = "0.9"
-surf = "2.0.0-alpha.4"
-async-std = "1.6.2"
+async-std = { version = "1.6.3", features = [ "attributes" ] }
+sha1 = { version = "0.6.0", features = [ "std" ] }
+rpassword = "5.0.0"
+thiserror = "1.0.20"
+surf = "1.0.3"
